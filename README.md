@@ -5,6 +5,8 @@ Simple tool allowing to write BTrace oneliners similar to the ones in DTrace
 
 While BTrace scripts are rather powerful writing them is a tedious process because they are in fact complete java classes. This tool adds the possibility to use "oneliner" syntax to specify what and how should be traced. The syntax resembles DTrace a bit and is designed to be concise and easy to use even if not that powerful.
 
+This project uses freemarker templates to convert the oneliners to the full-fledged BTrace scripts which can be submitted to the standard BTrace infrastructure.
+
 ### Oneliner
 
 A oneliner has the following form:
