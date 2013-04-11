@@ -1,3 +1,4 @@
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/57770ebe2d99bd10315a97be5cf37aae "githalytics.com")](http://githalytics.com/jbachorik/btracel)
 btracel
 =======
 
