@@ -40,6 +40,9 @@ The handler code can reference various parameters. They are either built in para
 * @return: A value returned by the probed method; valid only for **exit** handlers
 * @caught: A java.lang.Throwable that has caused the probed method to terminate; valid only for **error** handlers
 
+#### Simplified string concatenation
+You can use "+" operator to concatenate strings - eg. it is valid to call 'println("entering method" + @pcn + "." + @pmn + " at " + jstackStr())'
+
 #### Inferred parameters
 The parameters may be inferred from the method signature if provider. They represent the arguments passed to the probed method. The method signature must specify the argument names which will be then used in the handler code.
 
@@ -51,6 +54,7 @@ This will print the value of the int argument passed to each invocation of *java
 
 ### Installation
 After checking out and building the project you can find the distribution directory in **{basedir}/dist/ext**. While you can use the command **bin/btracel** directly from that location a more convenient would be copying the contents of **{basedir}/dist/ext** over to the directory where your **BTrace** installation resides.
+You can invoke "btracel -?" to display the command help.
 
 ### Warning
 This is just a proof-of-concept project. It might not be complete and the syntax may be changed in future.
