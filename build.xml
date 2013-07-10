@@ -7,7 +7,7 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="bdtrace_1" default="default" basedir=".">
+<project name="btracel" default="default" basedir=".">
     <description>Builds, tests, and runs the project bdtrace_1.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
@@ -79,7 +79,8 @@
         </copy>
         <copy todir="${dist.jar.dir}/ext/lib" flatten="true">
             <fileset dir="${dist.jar.dir}">
-                <include name="**/freemarker*.jar"/>
+                <include name="**/antlr4*.jar"/>
+                <include name="**/jopt-simple*.jar"/>
                 <include name="btracel.jar"/>
             </fileset>
         </copy>

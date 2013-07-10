@@ -1,102 +1,98 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sun.btrace.btracel;
 
-import com.sun.btrace.client.Main;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import java.io.StringWriter;
+import com.sun.btrace.CommandListener;
+import com.sun.btrace.btracel.export.BTrace1JavaExporter;
+import com.sun.btrace.btracel.model.Script;
+import com.sun.btrace.btracel.model.compiler.BTraceLCompiler;
+import com.sun.btrace.client.Client;
+import com.sun.btrace.comm.Command;
+import com.sun.btrace.comm.MessageCommand;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
 /**
  *
  * @author jbachorik
  */
 public class MainShort {
-public static void main(String[] args) throws Exception {
-        Configuration cfg = new Configuration();
-        cfg.setClassForTemplateLoading(MainShort.class, "");
-        Template t = cfg.getTemplate("onmethod.ftl");
+    public static void main(String[] args) throws Exception {
+        OptionParser parser = new OptionParser();
+        parser.accepts("x", "Show the BTrace java source. Must be used only in conjunction with -i option.");
+        parser.accepts("i", "BTrace oneliner. Can not be used with -f option.").requiredIf("x").withRequiredArg().ofType(String.class);
+        parser.accepts("f", "BTrace script file. Can not be used with -i option.").withRequiredArg().ofType(String.class);
+        parser.accepts("?", "Help.");
+        parser.accepts("h", "Help");
+        
+        OptionSet opts = parser.parse(args);
 
-        String s = parseDef(args[1], t);
-
-        Path f = java.nio.file.FileSystems.getDefault().getPath("/tmp/BTraceScript.java");
-        Files.write(f, s.getBytes("utf-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-
-        Main.main(new String[]{args[0], "/tmp/BTraceScript.java"});
-
-//        String[] test = new String[]{
-//            "com\\.toy\\.*:getWord:entry{println(\"Entering getWord()\")}",
-//            "java.util.ArrayList:int size():entry{println(\"Huhahah\")},exit{println(\"buhahah \" + @return);}",
-//            "java.util.ArrayList:boolean re.*All(java.util.Collection x):entry{println(@pmn);printCollection(@x);}",
-//            "::error{println(@pcn + \" \" + @pmn + \" :\");printException(@caught);}"
-//        };
-    }
-
-    private static int cntr = 0;
-
-    private static String parseDef(String def, Template t) throws Exception {
-        String p = def.replace("\\:", "#"); // replace the colons with hash to be regex friendly
-
-        int pos = 0;
-        String clz = "", method = "";
-        StringTokenizer st = new StringTokenizer(p.replace("::", " : : "), ":");
-        if (st.hasMoreTokens()) {
-            clz = st.nextToken().trim();
-            pos += clz.length();
+        if (opts.has("?") || opts.has("h")) {
+            parser.printHelpOn(System.out);
+            System.exit(0);
         }
-        pos++;
-        if (st.hasMoreTokens()) {
-            method = st.nextToken().trim();
-            pos += method.length();
+
+        if (!opts.has("x") && opts.nonOptionArguments().isEmpty()) {
+            throw new IllegalArgumentException("At least one of the parameters must be a PID");
         }
-        pos++;
 
-        TraceDef td = new TraceDef(clz.replace("#", "\\:"), method.replace("#", "\\:"));
-        int blockDepth = 0;
-        StringBuilder type = new StringBuilder();
-        StringBuilder body = new StringBuilder();
+        String scriptPath = null;
+        if (opts.has("i")) {
+            if (opts.has("f")) {
+                throw new IllegalArgumentException("Can not specify both -i and -f options");
+            }
+            
+            String oneliner = (String)opts.valueOf("i");
+            
+            Script scr = new BTraceLCompiler().compile(oneliner);
+            String s = scr.export(new BTrace1JavaExporter());
+            
+            if (opts.has("x")) {
+                System.out.println(s);
+                System.exit(0);
+            }
 
-        while(pos < def.length()) {
-            char c = def.charAt(pos++);
-            if (c != '{') {
-                if (c != '}') {
-                    if (blockDepth > 0) {
-                        body.append(c);
-                    } else {
-                        if (c != ',' && c != ' ') {
-                            type.append(c);
-                        }
-                    }
-                } else {
-                    if (--blockDepth == 0) {
-                        td.addHandler(type.toString(), body.toString());
-                        type = new StringBuilder();
-                        body = new StringBuilder();
-                    } else {
-                        body.append(c);
+            final Path temp = Files.createTempDirectory("btrace");
+            final Path f = temp.resolve(scr.getName() + ".java");
+            
+            Files.write(f, s.getBytes("utf-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+
+            Signal.handle(new Signal("INT"), new SignalHandler() {
+                @Override
+                public void handle(Signal signal) {
+                    try {
+                        Files.deleteIfExists(f);
+                        Files.deleteIfExists(temp);
+                        System.exit(0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
-            } else {
-                if (blockDepth++ > 0) {
-                    body.append(c);
+            });
+
+            scriptPath = f.toString();
+        } else if (opts.has("f")) {
+            scriptPath = (String)opts.valueOf("f");
+        }
+
+        final Client c = new Client(2020);
+        final byte[] x = c.compile(scriptPath, ".", new PrintWriter(System.err));
+        
+        c.attach(opts.nonOptionArguments().get(0));
+
+        c.submit(x, new String[0], new CommandListener() {
+            @Override
+            public void onCommand(Command cmnd) throws IOException {
+                if (cmnd.getType() == Command.MESSAGE) {
+                    MessageCommand msg = (MessageCommand)cmnd;
+                    System.out.print(msg.getMessage());
                 }
             }
-        }
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("td", td);
-        params.put("probeName", String.valueOf(cntr++));
-
-        StringWriter sw = new StringWriter();
-        t.process(params, sw);
-        return sw.toString();
+        });   
     }
 }

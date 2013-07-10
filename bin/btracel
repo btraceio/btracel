@@ -1,12 +1,4 @@
 #! /bin/sh
-if [ $# -ne 2 ] ; then
-  echo "Usage: btracel PID <oneliner>"
-  exit 0
-fi
-
-echo "Attaching>"
-echo "\tPID: $1"
-echo "\tHND: $2"
 
 if [ -z "$BTRACE_HOME" -o ! -d "$BTRACE_HOME" ] ; then
   # resolve links - $0 could be a link to btrace's home
@@ -44,7 +36,7 @@ if [ -f "${BTRACE_HOME}/build/btrace-client.jar" ] ; then
               TOOLS_JAR="${JAVA_HOME}/lib/tools.jar"
           ;;
        esac
-       ${JAVA_HOME}/bin/java -Dcom.sun.btrace.probeDescPath=. -Dcom.sun.btrace.dumpClasses=false -Dcom.sun.btrace.debug=false -Dcom.sun.btrace.unsafe=false -cp ${BTRACE_HOME}/build/btrace-client.jar:${TOOLS_JAR}:/usr/share/lib/java/dtrace.jar:../lib/btracel.jar:../lib/freemarker-2.3.14.jar com.sun.btrace.btracel.MainShort $1 "$2"
+       ${JAVA_HOME}/bin/java -Dcom.sun.btrace.probeDescPath=. -Dcom.sun.btrace.dumpClasses=false -Dcom.sun.btrace.debug=false -Dcom.sun.btrace.unsafe=false -cp ${BTRACE_HOME}/build/btrace-client.jar:${TOOLS_JAR}:/usr/share/lib/java/dtrace.jar:../lib/btracel.jar:../lib/antlr4-runtime-4.1.jar:../lib/jopt-simple-4.4.jar com.sun.btrace.btracel.MainShort "$@"
     else
        echo "Please set JAVA_HOME before running this script"
        exit 1
