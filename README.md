@@ -44,7 +44,7 @@ The handler code can reference various parameters. They are either built in para
 You can use "+" operator to concatenate strings - eg. it is valid to call 'println("entering method" + @pcn + "." + @pmn + " at " + jstackStr())'
 
 #### Inferred parameters
-The parameters may be inferred from the method signature if provider. They represent the arguments passed to the probed method. The method signature must specify the argument names which will be then used in the handler code.
+The parameters may be inferred from the method signature if provided. They represent the arguments passed to the probed method. The method signature must specify the argument names which will be then used in the handler code.
 
 **Example**
 java.util.ArrayList:java.lang.Object get(int arrIndex):entry {println(str(@arrIndex));}
