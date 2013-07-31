@@ -1,4 +1,4 @@
-// Generated from /home/jbachorik/Desktop/BTraceL.g4 by ANTLR 4.1
+// Generated from /home/jbachorik/src/java/btracel/src/BTraceL.g4 by ANTLR 4.1
 package com.sun.btrace.btracel.model.parser;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -11,6 +11,13 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#arglist}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArglist(@NotNull BTraceLParser.ArglistContext ctx);
+
 	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#assign}.
 	 * @param ctx the parse tree
@@ -54,6 +61,13 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	T visitExp_unary(@NotNull BTraceLParser.Exp_unaryContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#arg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArg(@NotNull BTraceLParser.ArgContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#methodmatch}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -87,6 +101,13 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExp_plus(@NotNull BTraceLParser.Exp_plusContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#signature}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSignature(@NotNull BTraceLParser.SignatureContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#methodid}.

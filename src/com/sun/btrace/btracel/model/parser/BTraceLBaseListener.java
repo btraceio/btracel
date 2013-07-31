@@ -1,4 +1,4 @@
-// Generated from /home/jbachorik/Desktop/BTraceL.g4 by ANTLR 4.1
+// Generated from /home/jbachorik/src/java/btracel/src/BTraceL.g4 by ANTLR 4.1
 package com.sun.btrace.btracel.model.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -12,6 +12,19 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * of the available methods.
  */
 public class BTraceLBaseListener implements BTraceLListener {
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterArglist(@NotNull BTraceLParser.ArglistContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitArglist(@NotNull BTraceLParser.ArglistContext ctx) { }
+
 	/**
 	 * {@inheritDoc}
 	 * <p/>
@@ -95,6 +108,19 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterArg(@NotNull BTraceLParser.ArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitArg(@NotNull BTraceLParser.ArgContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterMethodmatch(@NotNull BTraceLParser.MethodmatchContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -154,6 +180,19 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitExp_plus(@NotNull BTraceLParser.Exp_plusContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterSignature(@NotNull BTraceLParser.SignatureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitSignature(@NotNull BTraceLParser.SignatureContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

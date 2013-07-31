@@ -1,15 +1,15 @@
 grammar BTraceL;
 
-program: cutpoint ':' handlers EOF!;
+program: cutpoint COLON handlers EOF;
 
 cutpoint:
             cutdef | followdef;
 
 cutdef:
-            classmatch ':' methodmatch;
+            classmatch COLON methodmatch;
 
 followdef:
-            '[' cutdef ']' '~' '[' cutdef ']';
+            LSBRACKET cutdef RSBRACKET '~' LSBRACKET cutdef RSBRACKET;
 
 classmatch:
               pkgid | subclasses | regex;
@@ -18,19 +18,28 @@ methodmatch:
                methodid | regex;
 
 pkgid:
-         NAME ('.' NAME)*;
+         NAME (PERIOD NAME)*;
 
 methodid:
-            NAME;
+            NAME | signature;
+
+signature 
+    : (pkgid)? NAME LBRACKET arglist RBRACKET;
+      
+arglist
+    : arg (COMMA arg)*;
+      
+arg
+    : pkgid NAME;
 
 subclasses
-    : '+' pkgid;
+    : PLUS pkgid;
 
 regex
     : REGEXP_LITERAL;
 
 handlers:
-            handler (',' handler)*;
+            handler (COMMA handler)*;
 
 handler:
            type block;
@@ -39,7 +48,7 @@ type:
         'entry' | 'exit' | 'exception';
 
 block:
-         '{' statement (';' statement)* '}';
+         LCBRACKET statement (SEMI statement)* RCBRACKET;
 
 statement: assign | functionEval;
 
@@ -50,20 +59,20 @@ terminator: NEWLINE | EOF;
 exp_unary: VAR_REF | NUMBER | NAME | STRING_LITERAL | functionEval;
 
 exp_plus: exp_unary '+' exp;
-exp_minus: exp_unary '-' exp;
-exp_mul: exp_unary '*' exp;
-exp_div: exp_unary '/' exp;
-exp_mod: exp_unary '%' exp;
+exp_minus: exp_unary ' ' * '-' ' ' * exp;
+exp_mul: exp_unary ' ' * '*' ' ' * exp;
+exp_div: exp_unary ' ' * '/' ' ' * exp;
+exp_mod: exp_unary ' ' * '%' ' ' * exp;
 
 exp_binary: exp_plus | exp_minus | exp_mul;
 
 exp: exp_unary | exp_binary | '(' (exp_unary | exp_binary) ')';
 
 functionEval
-    : NAME '(' arguments? ')';
+    : NAME LBRACKET arguments? RBRACKET;
 
 arguments
-    : exp (',' exp)*;
+    : exp (COMMA exp)*;
 
 
 // LEXER TOKENS
@@ -84,9 +93,10 @@ fragment SYMBOL: '!' | '#'..'/' | ':'..'@' | '['..'`' | '{'..'~';
 
 VAR_REF: '@' NAME;
 
-WS: [ \t\r\n]+ -> skip;
+WS: ' ' -> skip;
+TAB: '\t' -> skip;
 
-NEWLINE: ('\r'? '\n')+;
+NEWLINE: ('\r'? '\n')+ -> skip;
 
 COLON: ':';
 COMMA: ',';

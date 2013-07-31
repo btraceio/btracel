@@ -1,3 +1,28 @@
+/*
+ * Copyright (c) 2013, Jaroslav Bachorik <jaroslav.bachorik@oracle.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
 package com.sun.btrace.btracel.model;
 
 import java.util.ArrayList;
@@ -13,58 +38,7 @@ public class MethodProbe {
     private String clazz;
     private String method;
     private String retType = "", argTypes = "", type = "";
-    final private List<Handler> handlers = new ArrayList<Handler>();
-
-    public static MethodProbe fromString(String def) {
-        String p = def.replace("\\:", "#"); // replace the colons with hash to be regex friendly
-
-        int pos = 0;
-        String clz = "", method = "";
-        StringTokenizer st = new StringTokenizer(p.replace("::", " : : "), ":");
-        if (st.hasMoreTokens()) {
-            clz = st.nextToken().trim();
-            pos += clz.length();
-        }
-        pos++;
-        if (st.hasMoreTokens()) {
-            method = st.nextToken().trim();
-            pos += method.length();
-        }
-        pos++;
-
-        MethodProbe td = new MethodProbe(clz.replace("#", "\\:"), method.replace("#", "\\:"));
-        int blockDepth = 0;
-        StringBuilder type = new StringBuilder();
-        StringBuilder body = new StringBuilder();
-
-        while(pos < def.length()) {
-            char c = def.charAt(pos++);
-            if (c != '{') {
-                if (c != '}') {
-                    if (blockDepth > 0) {
-                        body.append(c);
-                    } else {
-                        if (c != ',' && c != ' ') {
-                            type.append(c);
-                        }
-                    }
-                } else {
-                    if (--blockDepth == 0) {
-                        td.addHandler(type.toString(), body.toString());
-                        type = new StringBuilder();
-                        body = new StringBuilder();
-                    } else {
-                        body.append(c);
-                    }
-                }
-            } else {
-                if (blockDepth++ > 0) {
-                    body.append(c);
-                }
-            }
-        }
-        return td;
-    }
+    final private List<Handler> handlers = new ArrayList<>();
 
     public MethodProbe() {
         this(".*", ".*");

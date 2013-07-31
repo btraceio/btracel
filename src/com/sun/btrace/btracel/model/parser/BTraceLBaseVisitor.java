@@ -1,4 +1,4 @@
-// Generated from /home/jbachorik/Desktop/BTraceL.g4 by ANTLR 4.1
+// Generated from /home/jbachorik/src/java/btracel/src/BTraceL.g4 by ANTLR 4.1
 package com.sun.btrace.btracel.model.parser;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
@@ -12,6 +12,14 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements BTraceLVisitor<T> {
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitArglist(@NotNull BTraceLParser.ArglistContext ctx) { return visitChildren(ctx); }
+
 	/**
 	 * {@inheritDoc}
 	 * <p/>
@@ -66,6 +74,14 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitArg(@NotNull BTraceLParser.ArgContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitMethodmatch(@NotNull BTraceLParser.MethodmatchContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -99,6 +115,14 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitExp_plus(@NotNull BTraceLParser.Exp_plusContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitSignature(@NotNull BTraceLParser.SignatureContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

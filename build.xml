@@ -71,6 +71,9 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-pre-jar">
+        <delete file="${build.classes.dir}/BTraceL.g4" verbose="true"/>
+    </target>
     <target name="-post-jar">
         <mkdir dir="${dist.jar.dir}/ext/bin"/>
         <mkdir dir="${dist.jar.dir}/ext/lib"/>

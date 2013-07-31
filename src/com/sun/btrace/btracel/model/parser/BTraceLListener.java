@@ -1,4 +1,4 @@
-// Generated from /home/jbachorik/Desktop/BTraceL.g4 by ANTLR 4.1
+// Generated from /home/jbachorik/src/java/btracel/src/BTraceL.g4 by ANTLR 4.1
 package com.sun.btrace.btracel.model.parser;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -8,6 +8,17 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link BTraceLParser}.
  */
 public interface BTraceLListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#arglist}.
+	 * @param ctx the parse tree
+	 */
+	void enterArglist(@NotNull BTraceLParser.ArglistContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#arglist}.
+	 * @param ctx the parse tree
+	 */
+	void exitArglist(@NotNull BTraceLParser.ArglistContext ctx);
+
 	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#assign}.
 	 * @param ctx the parse tree
@@ -75,6 +86,17 @@ public interface BTraceLListener extends ParseTreeListener {
 	void exitExp_unary(@NotNull BTraceLParser.Exp_unaryContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#arg}.
+	 * @param ctx the parse tree
+	 */
+	void enterArg(@NotNull BTraceLParser.ArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#arg}.
+	 * @param ctx the parse tree
+	 */
+	void exitArg(@NotNull BTraceLParser.ArgContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#methodmatch}.
 	 * @param ctx the parse tree
 	 */
@@ -128,6 +150,17 @@ public interface BTraceLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExp_plus(@NotNull BTraceLParser.Exp_plusContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#signature}.
+	 * @param ctx the parse tree
+	 */
+	void enterSignature(@NotNull BTraceLParser.SignatureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#signature}.
+	 * @param ctx the parse tree
+	 */
+	void exitSignature(@NotNull BTraceLParser.SignatureContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#methodid}.
