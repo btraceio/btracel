@@ -23,37 +23,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.sun.btrace.btracel.builder;
+package net.java.btrace.nb.lexer;
 
-final public class EntryHandler extends AbstractHandlerBuilder<EntryHandler> {
+import java.util.Collection;
+import org.netbeans.modules.parsing.api.Snapshot;
+import org.netbeans.modules.parsing.spi.Parser;
+import org.netbeans.modules.parsing.spi.ParserFactory;
+
+/**
+ *
+ * @author Jaroslav Bachorik <jaroslav.bachorik@oracle.com>
+ */
+public class BTParserFactory extends ParserFactory {
     @Override
-    protected boolean validate(String call, Object... args) {
-        switch (call) {
-            case "print":
-            case "println": {
-                if (args.length == 1) {;
-                    if (args[0] instanceof String) {
-                        return checkRefs((String)args[0]);
-                    }
-                }
-            }
-            case "dumpHeap": {
-                if (args.length == 1) {
-                    if (args[0] instanceof String) {
-                        return checkRefs((String)args[0]);
-                    }
-                } else if (args.length == 2) {
-                    if (args[0] instanceof String && args[1] instanceof Boolean) {
-                        return checkRefs((String)args[0]);
-                    }
-                }
-                return false;
-            }
-            default: return false;
-        }
+    public Parser createParser(Collection<Snapshot> clctn) {
+        return new BTParser();
     }
-
-    private static boolean checkRefs(String sArg) {
-        return !sArg.contains("@return") && !sArg.contains("@duration") && !sArg.contains("@exception");
-    }
+    
 }

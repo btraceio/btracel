@@ -27,9 +27,12 @@ package com.sun.btrace.btracel.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+/**
+ * A tracing point identified by class/method
+ * @author Jaroslav Bachorik <jaroslav.bachorik@oracle.com>
+ */
 public class MethodProbe {
 
     final private static Pattern clzFqn = Pattern.compile("[A-Za-z_][A-Za-z_0-9\\$]*(\\.[A-Za-z_][A-Za-z_0-9\\$]*)*");

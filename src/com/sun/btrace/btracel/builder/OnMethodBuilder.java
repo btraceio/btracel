@@ -35,7 +35,7 @@ public class OnMethodBuilder extends AbstractOnMethodBuilder implements OnMethod
             super(td, script);
         }
 
-        final public _1 onEntry(EntryHandler h) {
+        final public _1 onEntry(EntryHandlerBuilder h) {
             getMethodProbe().addHandler("entry", h.getCode());
             return new _1(this);
         }
@@ -86,7 +86,7 @@ public class OnMethodBuilder extends AbstractOnMethodBuilder implements OnMethod
             super(b.getMethodProbe(), b.getScript());
         }
 
-        final public _3 onEntry(EntryHandler h) {
+        final public _3 onEntry(EntryHandlerBuilder h) {
             getMethodProbe().addHandler("exit", h.getCode());
             return new _3(this);
         }
@@ -113,7 +113,7 @@ public class OnMethodBuilder extends AbstractOnMethodBuilder implements OnMethod
             super(b.getMethodProbe(), b.getScript());
         }
 
-        final public _5 onEntry(EntryHandler h) {
+        final public _5 onEntry(EntryHandlerBuilder h) {
             getMethodProbe().addHandler("entry", h.getCode());
             return new _5(this);
         }
@@ -140,7 +140,7 @@ public class OnMethodBuilder extends AbstractOnMethodBuilder implements OnMethod
             super(b.getMethodProbe(), b.getScript());
         }
 
-        final public _7 onEntry(EntryHandler h) {
+        final public _7 onEntry(EntryHandlerBuilder h) {
             getMethodProbe().addHandler("entry", h.getCode());
             return new _7(this);
         }

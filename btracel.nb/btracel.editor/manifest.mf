@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: net.java.btrace.nb.lexer
+OpenIDE-Module-Localizing-Bundle: net/java/btrace/nb/lexer/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Layer: net/java/btrace/nb/lexer/layer.xml

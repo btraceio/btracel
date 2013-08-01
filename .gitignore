@@ -7,3 +7,10 @@
 /dist/
 /build/
 /nbproject/private
+/btracel.nb/nbproject/private/
+/btracel.nb/build/
+/btracel.nb/btracel.lib/build/
+/btracel.nb/btracel.lib/nbproject/private/
+/btracel.nb/btracel.editor/build/
+/btracel.nb/btracel.editor/nbproject/private/
+/btracel.nb/nbproject/genfiles.properties

@@ -27,7 +27,7 @@ package com.sun.btrace.btracel.model.compiler;
 
 import com.sun.btrace.BTraceUtils;
 import com.sun.btrace.btracel.builder.BTraceScript;
-import com.sun.btrace.btracel.builder.EntryHandler;
+import com.sun.btrace.btracel.builder.EntryHandlerBuilder;
 import com.sun.btrace.btracel.builder.ExitHandler;
 import com.sun.btrace.btracel.builder.OnMethodBuilder;
 import com.sun.btrace.btracel.model.Script;
@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.antlr.v4.runtime.ANTLRErrorListener;
@@ -54,6 +55,8 @@ import org.antlr.v4.runtime.dfa.DFA;
  */
 public class BTraceLCompiler {
     final private static class ArgsToStringFormatter extends BTraceLBaseVisitor<String> {
+        private String type = "object";
+        
         private boolean isEligible(String function) {
             for(Method m : BTraceUtils.class.getMethods()) {
                 if (m.getName().equals(function) && m.getReturnType() != void.class) {
@@ -62,6 +65,7 @@ public class BTraceLCompiler {
             }
             return false;
         }
+
         @Override
         public String visitExp_unary(BTraceLParser.Exp_unaryContext ctx) {
             return getUnaryString(ctx);
@@ -187,14 +191,30 @@ public class BTraceLCompiler {
                 return super.visitHandlers(ctx);
             }
 
-            private EntryHandler entryHandler(BTraceLParser.HandlerContext ctx) {
-                EntryHandler eh = new EntryHandler();
+            private EntryHandlerBuilder entryHandler(BTraceLParser.HandlerContext ctx) {
+                EntryHandlerBuilder eh = new EntryHandlerBuilder();
                 for(BTraceLParser.StatementContext stmt : ctx.block().statement()) {
                     String func = stmt.functionEval().NAME().getText();
                     switch (func) {
                         case "println": {
+//                            List<BTraceLParser.ExpContext> args = stmt.functionEval().arguments().exp();
+//                            Object[] paramArray = new Object[args.size()];
+//                            
+//                            for(BTraceLParser.ExpContext ec : args) {
+//                                
+//                            }
                             String args = stmt.functionEval().arguments().accept(new ArgsToStringFormatter());
                             eh.println("#" + args);
+                            break;
+                        }
+                        case "print": {
+                            String args = stmt.functionEval().arguments().accept(new ArgsToStringFormatter());
+                            eh.print("#" + args);
+                            break;
+                        }
+                        case "dumpHeap": {
+                            String args = stmt.functionEval().arguments().accept(new ArgsToStringFormatter());
+                            break;
                         }
                     }
                 }

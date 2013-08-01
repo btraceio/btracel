@@ -25,43 +25,80 @@
  */
 package com.sun.btrace.btracel.builder;
 
+import com.sun.btrace.btracel.builder.calls.DumpHeapCall;
+import com.sun.btrace.btracel.builder.calls.PrintCall;
+import com.sun.btrace.btracel.builder.calls.PrintlnCall;
 import com.sun.btrace.btracel.model.parser.FormatPart;
 import com.sun.btrace.btracel.model.parser.FormattedString;
 import com.sun.btrace.btracel.model.parser.SimpleFormatParser;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 abstract public class AbstractHandlerBuilder<T extends AbstractHandlerBuilder<T>> {
     private final StringBuilder codeBuilder = new StringBuilder();
+    protected final Map<String, CallSpecification> specs = new HashMap<>();
+    
+    public AbstractHandlerBuilder() {
+        addSpecs(new CallSpecification[] {
+            new PrintCall(),
+            new PrintlnCall(),
+            new DumpHeapCall()
+        });
+    }
+    
+    private void addSpecs(CallSpecification ... specs) {
+        for(CallSpecification spec : specs) {
+            addSpec(spec);
+        }
+    }
+    
+    private void addSpec(CallSpecification spec) {
+        specs.put(spec.getName(), spec);
+    }
+    
     final public T print(String msg) {
-        if (validate("print", msg)) {
-            codeBuilder.append("print(").append(format(msg)).append(");\n");
-            return (T)this;
+        CallSpecification spec = specs.get("print");
+        if (spec != null) {
+            if (spec.validate(getInvalidParams(), msg)) {
+                codeBuilder.append("print(").append(format(msg)).append(");\n");
+                return (T)this;
+            }
         }
         throw new IllegalStateException();
     }
 
     final public T println(String msg) {
-        if (validate("println", msg)) {
-            codeBuilder.append("println(").append(format(msg)).append(");\n");
-            return (T)this;
+        CallSpecification spec = specs.get("println");
+        if (spec != null) {
+            if (spec.validate(getInvalidParams(), msg)) {
+                codeBuilder.append("println(").append(format(msg)).append(");\n");
+                return (T)this;
+            }
         }
         throw new IllegalStateException();
     }
 
     final public T dumpHeap(String path) {
-        if (validate("dumpHeap", path)) {
-            codeBuilder.append("dumpHeap(").append(format(path)).append(");\n");
-            return (T)this;
+        CallSpecification spec = specs.get("dumpHeap");
+        if (spec != null) {
+            if (spec.validate(getInvalidParams(), path)) {
+                codeBuilder.append("dumpHeap(").append(format(path)).append(");\n");
+                return (T)this;
+            }
         }
         throw new IllegalStateException();
     }
 
     final public T dumpHeap(String path, boolean live) {
-        if (validate("dumpHeap", path, live)) {
-            codeBuilder.append("dumpHeap(").append(format(path)).append(", ").
-                        append(live).append(");\n");
-            return (T)this;
+         CallSpecification spec = specs.get("dumpHeap");
+        if (spec != null) {
+            if (spec.validate(getInvalidParams(), path, live)) {
+                codeBuilder.append("dumpHeap(").append(format(path)).append(", ").
+                            append(live).append(");\n");
+                return (T)this;
+            }
         }
         throw new IllegalStateException();
     }
@@ -91,6 +128,6 @@ abstract public class AbstractHandlerBuilder<T extends AbstractHandlerBuilder<T>
     final String getCode() {
         return codeBuilder.toString();
     }
-
-    abstract protected boolean validate(String call, Object ... args);
+    
+    abstract protected String[] getInvalidParams();
 }

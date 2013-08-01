@@ -31,6 +31,17 @@ public interface BTraceLListener extends ParseTreeListener {
 	void exitAssign(@NotNull BTraceLParser.AssignContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#exp_mul}.
+	 * @param ctx the parse tree
+	 */
+	void enterExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#exp_mul}.
+	 * @param ctx the parse tree
+	 */
+	void exitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#block}.
 	 * @param ctx the parse tree
 	 */
@@ -42,15 +53,15 @@ public interface BTraceLListener extends ParseTreeListener {
 	void exitBlock(@NotNull BTraceLParser.BlockContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link BTraceLParser#exp_mul}.
+	 * Enter a parse tree produced by {@link BTraceLParser#exp_compare}.
 	 * @param ctx the parse tree
 	 */
-	void enterExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx);
+	void enterExp_compare(@NotNull BTraceLParser.Exp_compareContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link BTraceLParser#exp_mul}.
+	 * Exit a parse tree produced by {@link BTraceLParser#exp_compare}.
 	 * @param ctx the parse tree
 	 */
-	void exitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx);
+	void exitExp_compare(@NotNull BTraceLParser.Exp_compareContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#type}.
@@ -95,6 +106,17 @@ public interface BTraceLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArg(@NotNull BTraceLParser.ArgContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#ifblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfblock(@NotNull BTraceLParser.IfblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#ifblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfblock(@NotNull BTraceLParser.IfblockContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#methodmatch}.
@@ -207,6 +229,17 @@ public interface BTraceLListener extends ParseTreeListener {
 	void exitRegex(@NotNull BTraceLParser.RegexContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#elseblock}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseblock(@NotNull BTraceLParser.ElseblockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#elseblock}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseblock(@NotNull BTraceLParser.ElseblockContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#subclasses}.
 	 * @param ctx the parse tree
 	 */
@@ -229,17 +262,6 @@ public interface BTraceLListener extends ParseTreeListener {
 	void exitFollowdef(@NotNull BTraceLParser.FollowdefContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link BTraceLParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterStatement(@NotNull BTraceLParser.StatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link BTraceLParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitStatement(@NotNull BTraceLParser.StatementContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#exp_minus}.
 	 * @param ctx the parse tree
 	 */
@@ -249,6 +271,17 @@ public interface BTraceLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExp_minus(@NotNull BTraceLParser.Exp_minusContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link BTraceLParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(@NotNull BTraceLParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link BTraceLParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(@NotNull BTraceLParser.StatementContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link BTraceLParser#exp}.

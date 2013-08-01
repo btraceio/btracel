@@ -26,6 +26,13 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAssign(@NotNull BTraceLParser.AssignContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#exp_mul}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -33,11 +40,11 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBlock(@NotNull BTraceLParser.BlockContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link BTraceLParser#exp_mul}.
+	 * Visit a parse tree produced by {@link BTraceLParser#exp_compare}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx);
+	T visitExp_compare(@NotNull BTraceLParser.Exp_compareContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#type}.
@@ -66,6 +73,13 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArg(@NotNull BTraceLParser.ArgContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#ifblock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfblock(@NotNull BTraceLParser.IfblockContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#methodmatch}.
@@ -138,6 +152,13 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	T visitRegex(@NotNull BTraceLParser.RegexContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#elseblock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseblock(@NotNull BTraceLParser.ElseblockContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#subclasses}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -152,18 +173,18 @@ public interface BTraceLVisitor<T> extends ParseTreeVisitor<T> {
 	T visitFollowdef(@NotNull BTraceLParser.FollowdefContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link BTraceLParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatement(@NotNull BTraceLParser.StatementContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#exp_minus}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExp_minus(@NotNull BTraceLParser.Exp_minusContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link BTraceLParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement(@NotNull BTraceLParser.StatementContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link BTraceLParser#exp}.

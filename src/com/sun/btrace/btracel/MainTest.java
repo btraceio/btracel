@@ -26,7 +26,7 @@
 package com.sun.btrace.btracel;
 
 import com.sun.btrace.btracel.builder.BTraceScript;
-import com.sun.btrace.btracel.builder.EntryHandler;
+import com.sun.btrace.btracel.builder.EntryHandlerBuilder;
 import com.sun.btrace.btracel.builder.ExceptionHandler;
 import com.sun.btrace.btracel.builder.ExitHandler;
 import com.sun.btrace.btracel.export.BTrace1JavaExporter;
@@ -39,7 +39,7 @@ public class MainTest {
     public static void main(String[] args) throws Exception {
         String x = new BTraceScript().
             onMethod("com\\.toy\\..*", "int getWord(java.lang.String a, int b)").
-                onEntry(new EntryHandler().
+                onEntry(new EntryHandlerBuilder().
                     println("hello dolly from @pcn#@pmn (@a, @b)").
                     println(": value = @self.myvar")
                 ).

@@ -43,6 +43,19 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterBlock(@NotNull BTraceLParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -56,13 +69,13 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx) { }
+	@Override public void enterExp_compare(@NotNull BTraceLParser.Exp_compareContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void exitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx) { }
+	@Override public void exitExp_compare(@NotNull BTraceLParser.Exp_compareContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -115,6 +128,19 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitArg(@NotNull BTraceLParser.ArgContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterIfblock(@NotNull BTraceLParser.IfblockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitIfblock(@NotNull BTraceLParser.IfblockContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -251,6 +277,19 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterElseblock(@NotNull BTraceLParser.ElseblockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitElseblock(@NotNull BTraceLParser.ElseblockContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterSubclasses(@NotNull BTraceLParser.SubclassesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -277,19 +316,6 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterStatement(@NotNull BTraceLParser.StatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitStatement(@NotNull BTraceLParser.StatementContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterExp_minus(@NotNull BTraceLParser.Exp_minusContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -297,6 +323,19 @@ public class BTraceLBaseListener implements BTraceLListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitExp_minus(@NotNull BTraceLParser.Exp_minusContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterStatement(@NotNull BTraceLParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitStatement(@NotNull BTraceLParser.StatementContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

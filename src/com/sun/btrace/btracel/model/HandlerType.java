@@ -25,6 +25,10 @@
  */
 package com.sun.btrace.btracel.model;
 
+/**
+ * Fairly tolerant trace point handler type
+ * @author Jaroslav Bachorik <jaroslav.bachorik@oracle.com>
+ */
 public enum HandlerType {
     ENTRY, RETURN, ERROR;
 

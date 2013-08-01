@@ -32,7 +32,10 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * A generic representation of a tracing handler
+ * @author Jaroslav Bachorik <jaroslav.bachorik@oracle.com>
+ */
 public final class Handler {
     private static final Pattern argRef = Pattern.compile("@([a-zA-Z][a-zA-Z0-9_]*)");
     private static final Map<String, Argument> knownArguments = new HashMap<String, Argument>() {

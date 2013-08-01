@@ -34,6 +34,14 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitBlock(@NotNull BTraceLParser.BlockContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -42,7 +50,7 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitExp_mul(@NotNull BTraceLParser.Exp_mulContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExp_compare(@NotNull BTraceLParser.Exp_compareContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -75,6 +83,14 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitArg(@NotNull BTraceLParser.ArgContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitIfblock(@NotNull BTraceLParser.IfblockContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -162,6 +178,14 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitElseblock(@NotNull BTraceLParser.ElseblockContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitSubclasses(@NotNull BTraceLParser.SubclassesContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -178,7 +202,7 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStatement(@NotNull BTraceLParser.StatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExp_minus(@NotNull BTraceLParser.Exp_minusContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -186,7 +210,7 @@ public class BTraceLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitExp_minus(@NotNull BTraceLParser.Exp_minusContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStatement(@NotNull BTraceLParser.StatementContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
