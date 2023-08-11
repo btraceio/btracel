@@ -46,7 +46,9 @@ You can use "+" operator to concatenate strings - eg. it is valid to call 'print
 The parameters may be inferred from the method signature if provided. They represent the arguments passed to the probed method. The method signature must specify the argument names which will be then used in the handler code.
 
 **Example**
+```
 java.util.ArrayList:java.lang.Object get(int arrIndex):entry {println(str(@arrIndex));}
+```
 
 This will print the value of the int argument passed to each invocation of *java.util.ArrayList.get()* method.
 
